@@ -1,0 +1,18 @@
+{
+    "name": "coud0011/php-crud-music",
+    "description": "Développement d'une application Web de consultation et modification de morceaux de musique",
+    "type": "project",
+    "license": "Copyleft",
+    "autoload": {
+        "psr-4": {
+            "": "src/"
+        }
+    },
+    "authors": [
+        {
+            "name": "coud0011",
+            "email": "axel.coudrot@etudiant.univ-reims.fr"
+        }
+    ],
+    "require": {}
+}
