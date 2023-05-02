@@ -47,3 +47,8 @@ Nous avons effectué ces étapes :
     Ouvrez le fichier « src/Database/Mypdo.php » et constatez sa correction
     Documentez votre projet dans « README.md » en listant les précédentes commandes dans une partie « Style de codage »
 
+Nous avons aussi mis à votre disposition des scripts de composer pour verifier et corriger vos script php : 
+```
+composer test:cs
+composer fix:cs
+```

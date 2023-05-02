@@ -1,5 +1,7 @@
 <?php
+
 namespace Html;
+
 class WebPage
 {
     private string $head = "";
@@ -154,25 +156,22 @@ class WebPage
      * @param string $string
      * @return string
      */
-    public function escapeString(string $string):string
+    public function escapeString(string $string): string
     {
-        return htmlspecialchars($string,  ENT_QUOTES | ENT_IGNORE | ENT_HTML5);
+        return htmlspecialchars($string, ENT_QUOTES | ENT_IGNORE | ENT_HTML5);
     }
 
     /**
      * Méthode Statique renvoyant la date de dernière modification du script principale
      * @return string
      */
-    public static function getLastModification():string
+    public static function getLastModification(): string
     {
         $LastModif=getlastmod();
-        if ($LastModif==False)
-        {
+        if ($LastModif==false) {
             $res="Erreur!";
-        }
-        else
-        {
-            $res=date ("d/m/Y \à H:i:s", getlastmod());
+        } else {
+            $res=date("d/m/Y \à H:i:s", getlastmod());
         }
         return $res;
     }

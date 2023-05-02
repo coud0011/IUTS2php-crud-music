@@ -21,11 +21,15 @@
         "friendsofphp/php-cs-fixer": "^3.16"
     },
     "scripts": {
-        "test": [
+        "start:linux": [
             "Composer\\Config::disableProcessTimeout",
-            "phpunit"
+            "bin/run-server.sh"
         ],
-        "start:linux": "bin/run-server.sh"
+        "test:cs": [
+            "php vendor/bin/php-cs-fixer fix --dry-run --diff"
+        ],
+        "fix:cs": [
+            "php vendor/bin/php-cs-fixer fix"
+        ]
     }
-
 }
