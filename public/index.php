@@ -1,23 +1,17 @@
 <?php
 
 declare(strict_types=1);
+use Database\MyPdo;
+use Html\WebPage;
 
 require_once '../vendor/autoload.php';
+$webPage= new WebPage("Application de consultation et de modification d'une base de donnée de musique");
 
-$html= <<<HTML
-<!DOCTYPE html>
-<html lang="fr">
-  <head>
-      <meta charset="UTF-8">
-    <title>Application de consultation et de modification d'une base de donnée de musique</title>
-  </head>
-  <body>
-    <h1>Hello Music!</h1>
-
-HTML;
+$webPage->appendContent("<h1>Hello Music!</h1>");
 
 
-use Database\MyPdo;
+
+
 
 MyPDO::setConfiguration('mysql:host=mysql;dbname=cutron01_music;charset=utf8', 'web', 'web');
 
@@ -30,9 +24,9 @@ SQL
 );
 
 $stmt->execute();
-$html.="    <table>\n      <tr><th>Nom de l'artiste</th></tr>\n";
+$webPage->appendContent("\n    <table>\n      <tr><th>Nom de l'artiste</th></tr>\n");
 while (($ligne = $stmt->fetch()) !== false) {
-    $html.="      <tr><td>{$ligne['name']}</tr></td>\n";
+    $webPage->appendContent("      <tr><td>{$webPage->escapeString($ligne['name'])}</tr></td>\n");
 }
-$html.="    </table>\n  </body>\n</html>";
-echo $html;
+$webPage->appendContent("    </table>\n  </body>\n</html>");
+echo $webPage->toHTML();
