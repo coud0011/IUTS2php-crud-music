@@ -52,3 +52,7 @@ Nous avons aussi mis à votre disposition des scripts de composer pour verifier 
 composer test:cs
 composer fix:cs
 ```
+
+## Configuration de la base de donnée
+Avec le fichier .mypdo.ini, la connection et la configuration
+à la base de donnée sera automatique pour tous les fichiers php.
