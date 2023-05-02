@@ -10,6 +10,8 @@ Pour lancer le serveur local qui va vous permettre de tester les différentes fo
 php -d display_errors -S localhost:8000 -t public/
 ```
 Puis vous pouvez y accéder avec le [LocalHost](http://localhost:8000)
+Cependant nous avons ensuite développé un exécutable : bin/run-server.sh
+permettant de lancer automatique le serveur local
 ## Style de codage
 Nous avons effectué ces étapes : 
 
