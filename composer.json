@@ -19,5 +19,13 @@
     },
     "require-dev": {
         "friendsofphp/php-cs-fixer": "^3.16"
+    },
+    "scripts": {
+        "test": [
+            "Composer\\Config::disableProcessTimeout",
+            "phpunit"
+        ],
+        "start:linux": "bin/run-server.sh"
     }
+
 }

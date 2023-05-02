@@ -11,7 +11,10 @@ php -d display_errors -S localhost:8000 -t public/
 ```
 Puis vous pouvez y accéder avec le [LocalHost](http://localhost:8000)
 Cependant nous avons ensuite développé un exécutable : bin/run-server.sh
-permettant de lancer automatique le serveur local
+permettant de lancer automatique le serveur local celui ci est exécuté par ma commande : 
+```
+composer start:linux
+```
 ## Style de codage
 Nous avons effectué ces étapes : 
 
