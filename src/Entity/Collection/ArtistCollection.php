@@ -17,7 +17,7 @@ class ArtistCollection
      * de notre base de donnée
      * @return Artist[]
      */
-    public function findAll(): array
+    public static function findAll(): array
     {
         $stmt = MyPDO::getInstance()->prepare(
             <<<'SQL'
