@@ -9,19 +9,24 @@ if (!isset($_GET["artistId"]) || !ctype_digit($_GET["artistId"])) {
     exit();
 }
 $artistId=$_GET["artistId"];
-$firstRequest= MyPdo::getInstance()->prepare(
+$artistRequest= MyPdo::getInstance()->prepare(
     <<<SQL
 SELECT name
 FROM artist
 WHERE id=:artistId
 SQL
 );
-$firstRequest->execute([':artistId' => $artistId]);
-$webPage= new WebPage($firstRequest->fetch()['name']);
+$artistRequest->execute([':artistId' => $artistId]);
+$ligne=$artistRequest->fetch();
+if (!isset($ligne['name'])) {
+    http_response_code(404);
+    exit();
+}
+$webPage= new WebPage($ligne['name']);
 
 
 
-$secondRequest= MyPdo::getInstance()->prepare(
+$albumRequest= MyPdo::getInstance()->prepare(
     <<<SQL
 SELECT *
 FROM album
@@ -29,10 +34,10 @@ WHERE artistId=:artistId
 ORDER BY year desc, name
 SQL
 );
-$secondRequest->execute([':artistId' => $artistId]);
+$albumRequest->execute([':artistId' => $artistId]);
 
 $webPage->appendContent('<div><ul>');
-while (($ligne = $secondRequest->fetch())!= false) {
+while (($ligne = $albumRequest->fetch())!= false) {
     $year=$webPage->escapeString("{$ligne['year']}");
     $name=$webPage->escapeString("{$ligne['name']}");
     $webPage->appendContent(
