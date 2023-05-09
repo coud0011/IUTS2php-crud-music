@@ -4,7 +4,11 @@ declare(strict_types=1);
 use Database\MyPdo;
 use Html\WebPage;
 
-$artistId=17;
+if (!isset($_GET["artistId"]) || !ctype_digit($_GET["artistId"])) {
+    header("Location: /", true, 302);
+    exit();
+}
+$artistId=$_GET["artistId"];
 $firstRequest= MyPdo::getInstance()->prepare(
     <<<SQL
 SELECT name
@@ -22,7 +26,7 @@ $secondRequest= MyPdo::getInstance()->prepare(
 SELECT *
 FROM album
 WHERE artistId=:artistId
-ORDER BY year desc;
+ORDER BY year desc, name
 SQL
 );
 $secondRequest->execute([':artistId' => $artistId]);

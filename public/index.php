@@ -8,6 +8,9 @@ $webPage= new WebPage("Application de consultation et de modification d'une base
 
 $webPage->appendContent(<<<HTML
 <h1>Hello Music!</h1>
+<form>
+
+</form>
 <a href="artist.php">Page Artiste</a>
 HTML);
 
