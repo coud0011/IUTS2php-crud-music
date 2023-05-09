@@ -6,7 +6,10 @@ use Html\WebPage;
 
 $webPage= new WebPage("Application de consultation et de modification d'une base de donnée de musique");
 
-$webPage->appendContent("<h1>Hello Music!</h1>");
+$webPage->appendContent(<<<HTML
+<h1>Hello Music!</h1>
+<a href="artist.php">Page Artiste</a>
+HTML);
 
 
 
