@@ -60,7 +60,7 @@ class WebPage
      */
     public function appendToHead(string $content)
     {
-        $this->head .= "$content";
+        $this->head .= "\n        $content";
     }
 
     /**
@@ -121,29 +121,29 @@ class WebPage
     {
         $date=WebPage::getLastModification();
         $css= <<<CSS
-            footer
-            {
-                display:flex;
-                font-style: italic;
-                font-size: small;
-            }
+        footer{
+                        display:flex;
+                        font-style: italic;
+                        font-size: small;
+                    }
         CSS;
         $html= <<<HTML
         <!DOCTYPE html>
         <html lang="fr">
             <head>
                 <meta charset="utf-8">
-                <meta name="viewport" content="width=device-width, initial-scale=1" />
-                $this->head
-                <style>$css</style>
+                <meta name="viewport" content="width=device-width, initial-scale=1" />$this->head
+                <style>
+                    $css
+                </style>
             <title>$this->title</title>
             </head>
             <body>
                 $this->body
+                <footer>
+                    Dernière modification de cette page le $date
+                </footer>
             </body>
-            <footer>
-                Dernière modification de cette page le $date
-            </footer>
         </html>
         HTML;
         return $html;
