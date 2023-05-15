@@ -10,7 +10,7 @@ class Artist
     private string $name;
 
     /**
-     * Accesseur de l'Id de l'artiste
+     * Accesseur de l'id de l'artiste
      * @return int
      */
     public function getId(): int
