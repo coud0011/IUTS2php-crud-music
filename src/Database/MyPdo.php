@@ -215,7 +215,7 @@ final class MyPdo extends PDO
         $directory = $appDir !== false ? $appDir . DIRECTORY_SEPARATOR : '';
         $parameterFile = sprintf('%s.mypdo%s.ini', $directory, $env ? ".$env" : '');
         // Lecture du fichier de configuration
-        $parameters = @parse_ini_file($parameterFile, true);
+        $parameters = parse_ini_file($parameterFile, true);
         if ($parameters !== false) {
             if (!isset($parameters['mypdo'])) {
                 throw new PDOException('`mypdo` section not found in `' . basename($parameterFile) . '`');
