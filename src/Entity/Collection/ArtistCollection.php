@@ -20,7 +20,7 @@ class ArtistCollection
     public static function findAll(): array
     {
         $stmt = MyPDO::getInstance()->prepare(
-            <<<'SQL'
+            <<<SQL
     SELECT id, name
     FROM artist
     ORDER BY name
