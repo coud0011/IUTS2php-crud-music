@@ -21,12 +21,13 @@ class AlbumCollection
      * de notre base de donnée
      * @return Album[]
      */
-    public static function findAll(): array
+    public static function findByArtistId(int $artistId): array
     {
         $stmt = MyPDO::getInstance()->prepare(
             <<<SQL
     SELECT id, name, year, artistId, genreId, coverId
     FROM album
+    WHERE artistId='$artistId'
     ORDER BY year desc, name
 SQL
         );
