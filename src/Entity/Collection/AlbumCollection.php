@@ -24,7 +24,7 @@ class AlbumCollection
     public static function findAll(): array
     {
         $stmt = MyPDO::getInstance()->prepare(
-            <<<'SQL'
+            <<<SQL
     SELECT id, name, year, artistId, genreId, coverId
     FROM album
     ORDER BY year desc, name
