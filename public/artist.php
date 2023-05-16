@@ -15,8 +15,6 @@ try {
 
     $webPage= new WebPage($artist->getName());
 
-
-
     $albums=$artist->getAlbums();
 
     $webPage->appendContent('<div><ul>');
