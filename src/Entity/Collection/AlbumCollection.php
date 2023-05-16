@@ -27,12 +27,13 @@ class AlbumCollection
             <<<SQL
     SELECT id, name, year, artistId, genreId, coverId
     FROM album
-    WHERE artistId='$artistId'
+    WHERE artistId=:artistId
     ORDER BY year desc, name
 SQL
         );
-        $stmt->execute();
+        $stmt->execute([':artistId' => $artistId]);
         $stmt->setFetchMode(PDO::FETCH_CLASS, Album::class);
         return $stmt->fetchAll();
+
     }
 }
