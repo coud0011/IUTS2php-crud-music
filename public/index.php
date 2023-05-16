@@ -2,6 +2,7 @@
 
 declare(strict_types=1);
 
+use Entity\Artist;
 use Html\WebPage;
 use Entity\Collection\ArtistCollection;
 
@@ -14,7 +15,7 @@ HTML
 );
 
 $artistCollection=ArtistCollection::findAll();
-foreach($artistCollection as $key=>$artist) {
+foreach($artistCollection as $artist) {
     $id=$webPage->escapeString("{$artist->getId()}");
     $name=$webPage->escapeString($artist->getName());
     $webPage->appendContent(

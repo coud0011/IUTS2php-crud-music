@@ -1,52 +1,39 @@
 <?php
 
 declare(strict_types=1);
-require_once '../vendor/autoload.php';
-use Database\MyPdo;
+use Entity\Artist;
+use Entity\Exception\EntityNotFoundException;
 use Html\WebPage;
 
-if (!isset($_GET["artistId"]) || !ctype_digit($_GET["artistId"])) {
-    header("Location: /", true, 302);
-    exit();
-}
-$artistId=$_GET["artistId"];
-$artistRequest= MyPdo::getInstance()->prepare(
-    <<<SQL
-SELECT name
-FROM artist
-WHERE id=:artistId
-SQL
-);
-$artistRequest->execute([':artistId' => $artistId]);
-$ligne=$artistRequest->fetch();
-if (!isset($ligne['name'])) {
+try {
+    if (!isset($_GET["artistId"]) || !ctype_digit($_GET["artistId"])) {
+        header("Location: /", true, 302);
+        exit();
+    }
+    $artistId=(int)$_GET["artistId"];
+    $artist = Artist::findById($artistId);
+
+    $webPage= new WebPage($artist->getName());
+
+
+
+    $albums=$artist->getAlbums();
+
+    $webPage->appendContent('<div><ul>');
+    foreach ($albums as $album) {
+        $year=$webPage->escapeString("{$album->getYear()}");
+        $name=$webPage->escapeString($album->getName());
+        $webPage->appendContent(
+            <<<HTML
+    <li>{$year} {$name}</li>
+HTML
+        );
+    }
+    $webPage->appendContent('</ul></div>');
+
+    echo $webPage->toHTML();
+
+} catch (EntityNotFoundException $e) {
     http_response_code(404);
     exit();
 }
-$webPage= new WebPage($ligne['name']);
-
-
-
-$albumRequest= MyPdo::getInstance()->prepare(
-    <<<SQL
-SELECT *
-FROM album
-WHERE artistId=:artistId
-ORDER BY year desc, name
-SQL
-);
-$albumRequest->execute([':artistId' => $artistId]);
-
-$webPage->appendContent('<div><ul>');
-while (($ligne = $albumRequest->fetch())!= false) {
-    $year=$webPage->escapeString("{$ligne['year']}");
-    $name=$webPage->escapeString("{$ligne['name']}");
-    $webPage->appendContent(
-        <<<HTML
-    <li>{$year} {$name}</li>
-HTML
-    );
-}
-$webPage->appendContent('</ul></div>');
-
-echo $webPage->toHTML();
