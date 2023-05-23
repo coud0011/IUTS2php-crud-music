@@ -4,9 +4,9 @@ namespace Html;
 
 class WebPage
 {
-    private string $head = "";
-    private string $title = "";
-    private string $body = "";
+    protected string $head = "";
+    protected string $title = "";
+    protected string $body = "";
 
 
     /**
@@ -171,7 +171,7 @@ class WebPage
         if ($LastModif==false) {
             $res="Erreur!";
         } else {
-            $res=date("d/m/Y \à H:i:s", getlastmod());
+            $res=date("d/m/Y-H:i:s", getlastmod());
         }
         return $res;
     }
