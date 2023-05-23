@@ -4,9 +4,9 @@ namespace Html;
 
 class WebPage
 {
-    protected string $head = "";
-    protected string $title = "";
-    protected string $body = "";
+    private string $head = "";
+    private string $title = "";
+    private string $body = "";
 
 
     /**

@@ -1,35 +1,46 @@
-html,body{
-    height:  100%;
-    width:   100%;
-    display: flex;
-    margin:0;
-    padding:0;
-
+html, body {
+    height: 100%;
+    width: 100%;
+    margin: 0;
+    padding: 0;
 }
-body,.list,.content{
+
+body {
+    display: flex;
     flex-direction: column;
 }
-.header,a,.list,.footer,h1{
-    display:flex;
-    flex:1 1 auto;
-    margin:10px;
-    padding:0;
+
+.list, .content {
+    flex-direction: column;
+}
+.list{
+    list-style-type: none;
+}
+.header, a, .list, .footer, h1 {
+    display: flex;
+    margin: 10px;
+    padding: 0;
 }
 
-.content{
-    height:80%;
-    overflow: scroll;
-    display:flex;
-    flex:0 0 auto;
-    margin:10px;
-    padding:10px;
+.content {
+    display: flex;
+    flex: 1;
+    margin: 10px;
+    overflow-y: auto;
+    padding: 10px;
 }
 
-.footer{
+.footer {
     justify-content: center;
 }
-h1{
+
+h1 {
     display: flex;
     flex: 0 0 auto;
 
+}
+
+.header {
+    overflow: visible;
+    justify-content: center;
 }

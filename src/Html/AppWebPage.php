@@ -19,33 +19,22 @@ class AppWebPage extends WebPage
     public function toHTML(): string
     {
         $date=WebPage::getLastModification();
-        $css= <<<CSS
-        footer{
-                        display:flex;
-                        font-style: italic;
-                        font-size: small;
-                    }
-        CSS;
-        $html= <<<HTML
+        return <<<HTML
         <!DOCTYPE html>
         <html lang="fr">
             <head>
                 <meta charset="utf-8">
-                <meta name="viewport" content="width=device-width, initial-scale=1" />$this->head
-                <style>
-                    $css
-                </style>
-            <title>$this->title</title>
+                <meta name="viewport" content="width=device-width, initial-scale=1" />{$this->getHead()}
+                <title>{$this->getTitle()}</title>
             </head>
             <body>
-                <header class="header"><h1>$this->title</h1></header>
-                $this->body
+                <header class="header"><h1>{$this->getTitle()}</h1></header>
+                <main class="content">{$this->getBody()}</main>
                 <footer class="footer">
                     Dernière modification : $date
                 </footer>
             </body>
         </html>
         HTML;
-        return $html;
     }
 }

@@ -51,6 +51,9 @@ SQL
         return $artist;
     }
 
+    /**
+     * @return Album[]
+     */
     public function getAlbums(): array
     {
         return AlbumCollection::findByArtistId($this->id);

@@ -3,7 +3,7 @@
 declare(strict_types=1);
 use Entity\Artist;
 use Entity\Exception\EntityNotFoundException;
-use Html\WebPage;
+use Html\AppWebPage;
 
 try {
     if (!isset($_GET["artistId"]) || !ctype_digit($_GET["artistId"])) {
@@ -13,21 +13,22 @@ try {
     $artistId=(int)$_GET["artistId"];
     $artist = Artist::findById($artistId);
 
-    $webPage= new WebPage($artist->getName());
+    $webPage= new AppWebPage($artist->getName());
 
     $albums=$artist->getAlbums();
 
-    $webPage->appendContent('<div><ul>');
+    $webPage->appendContent('<ul class="list">');
     foreach ($albums as $album) {
-        $year=$webPage->escapeString("{$album->getYear()}");
-        $name=$webPage->escapeString($album->getName());
         $webPage->appendContent(
             <<<HTML
-    <li>{$year} {$name}</li>
+    <li class="album">
+        <span class="album__year">{$album->getYear()}</span>
+        <span class="album__name">{$webPage->escapeString($album->getName())}</span>
+    </li>
 HTML
         );
     }
-    $webPage->appendContent('</ul></div>');
+    $webPage->appendContent('</ul>');
 
     echo $webPage->toHTML();
 
