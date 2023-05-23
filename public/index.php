@@ -3,10 +3,10 @@
 declare(strict_types=1);
 
 use Entity\Artist;
-use Html\WebPage;
+use Html\AppWebPage;
 use Entity\Collection\ArtistCollection;
 
-$webPage= new WebPage("Application de consultation et de modification d'une base de donnée de musique");
+$webPage= new AppWebPage("Application de consultation et de modification d'une base de donnée de musique");
 $webPage->appendContent(
     <<<HTML
         <h1>Hello Music!</h1>
