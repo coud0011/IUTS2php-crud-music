@@ -9,8 +9,9 @@ use Entity\Collection\ArtistCollection;
 $webPage= new AppWebPage("Application de consultation et de modification d'une base de donnée de musique");
 $webPage->appendContent(
     <<<HTML
+        <div class="content">
         <h1>Hello Music!</h1>
-        <ul>
+        <ul class="list">
 HTML
 );
 
@@ -26,7 +27,7 @@ HTML
 }
 $webPage->appendContent(
     <<<HTML
-    </ul>
+    </ul></div>
 HTML
 );
 echo $webPage->toHTML();

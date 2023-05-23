@@ -35,11 +35,12 @@ class AppWebPage extends WebPage
                 <style>
                     $css
                 </style>
-            <title><h1>$this->title</h1></title>
+            <title>$this->title</title>
             </head>
             <body>
+                <header class="header"><h1>$this->title</h1></header>
                 $this->body
-                <footer>
+                <footer class="footer">
                     Dernière modification : $date
                 </footer>
             </body>

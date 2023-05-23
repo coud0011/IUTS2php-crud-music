@@ -140,7 +140,7 @@ class WebPage
             </head>
             <body>
                 $this->body
-                <footer>
+                <footer class="footer">
                     Dernière modification de cette page le $date
                 </footer>
             </body>
