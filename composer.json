@@ -55,7 +55,12 @@
         ],
         "test": [
             "@test:cs",
-            "@test:codecept"
+            "@test:codecept",
+            "@test:composer"
+        ],
+        "test: browse": [
+            "php vendor/bin/codecept clean",
+            "php vendor/bin/codecept run Browse"
         ]
     }
 }

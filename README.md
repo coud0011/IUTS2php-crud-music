@@ -64,7 +64,7 @@ Celles-ci sont regroupées sous une commande :
 ```bash
 composer test
 ```
-Ce script est composé de deux autres : 
+Ce script est composé de trois autres : 
 ```
 composer test:cs
 ```
@@ -72,11 +72,16 @@ Puis
 ```
 composer test:codecept
 ```
+Et enfin
+```
+composer test:browse
+```
 Le premier script permet de vérifier 
 le style de codage et la syntaxe simple,
 Le deuxième permet de tester la bonne exécution et 
 la conformité des scripts php avec les autres scripts 
 et la base de donnée.
+Le troisième lui teste le résultat html renvoyé.
 #### Dans le cas d'une erreur de style de codage
 Nous vous proposons pour cela une commande pour 
 corriger automatiquement vos fichiers : 
