@@ -91,4 +91,4 @@ composer fix:cs
 #### Pour toutes autres erreurs relevées durant les tests
 Malheureusement, la magie n'existe pas, il vous faudra revoir 
 vous-même vos codes. Vous avez quand même des indications 
-pouvant vous aider dans les relevés de tests.
+pouvant vous aider dans les relevés de tests. 
