@@ -23,8 +23,11 @@ try {
         $webPage->appendContent(
             <<<HTML
     <li class="album">
-        <span class="album__year">{$album->getYear()}</span>
-        <span class="album__name">{$webPage->escapeString($album->getName())}</span>
+        <img class="album__cover" src="cover.php?coverId={$webPage->escapeString("{$album->getCoverId()}")}" alt="Pochette de l'album {$webPage->escapeString($album->getName())}">
+        <div class="album__text">
+            <span class="album__year">{$album->getYear()}</span>
+            <span class="album__name">{$webPage->escapeString($album->getName())}</span>
+        </div>
     </li>
 HTML
         );
