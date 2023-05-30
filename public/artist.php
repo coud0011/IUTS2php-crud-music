@@ -7,13 +7,14 @@ use Html\AppWebPage;
 
 try {
     if (!isset($_GET["artistId"]) || !ctype_digit($_GET["artistId"])) {
-        header("Location: /", true, 302);
+        header("Location: index.php", true, 302);
         exit();
     }
     $artistId=(int)$_GET["artistId"];
     $artist = Artist::findById($artistId);
 
-    $webPage= new AppWebPage($artist->getName());
+    $webPage= new AppWebPage();
+    $webPage->setTitle("Albums de {$webPage->escapeString($artist->getName())}");
 
     $albums=$artist->getAlbums();
 
