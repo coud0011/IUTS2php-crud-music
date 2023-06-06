@@ -11,20 +11,28 @@ use PDO;
 
 class Artist
 {
-    private int $id;
+    private ?int $id;
     private string $name;
 
     /**
-     * Accesseur de l'id de l'artiste
-     * @return int
+     * @return int|null
      */
-    public function getId(): int
+    public function getId(): ?int
     {
         return $this->id;
     }
 
     /**
-     * Accesseur du nom de l'artiste
+     * @param int|null $id
+     * @return Artist
+     */
+    private function setId(?int $id): Artist
+    {
+        $this->id = $id;
+        return $this;
+    }
+
+    /**
      * @return string
      */
     public function getName(): string
@@ -32,7 +40,34 @@ class Artist
         return $this->name;
     }
 
-    public static function findById(int $id): Artist // throw EntityNotFoundException
+    /**
+     * @param string $name
+     * @return Artist
+     */
+    public function setName(string $name): Artist
+    {
+        $this->name = $name;
+        return $this;
+    }
+
+    public function delete()
+    {
+        $stmt = MyPDO::getInstance()->prepare(
+            <<<SQL
+    DELETE
+    FROM artist
+    WHERE id=:id
+SQL
+        );
+        $stmt->execute([':id' => $this->id]);
+        $this->id=null;
+        return $this;
+    }
+
+    /**
+     * @throws EntityNotFoundException
+     */
+    public static function findById(int $id): Artist
     {
         $stmt = MyPDO::getInstance()->prepare(
             <<<SQL
@@ -57,5 +92,49 @@ SQL
     public function getAlbums(): array
     {
         return AlbumCollection::findByArtistId($this->id);
+    }
+
+    public function update(): self
+    {
+        $stmt = MyPDO::getInstance()->prepare(
+            <<<SQL
+    UPDATE artist
+    SET name=:name
+    WHERE id=:id
+SQL
+        );
+        $stmt->execute([':id' => $this->id, ':name' => $this->name]);
+        return $this;
+    }
+    public function insert(): self
+    {
+        $stmt = MyPDO::getInstance()->prepare(
+            <<<SQL
+    INSERT INTO artist (name)
+    VALUES (:name)
+SQL
+        );
+        $stmt->execute([':name' => $this->name]);
+        $this->setId((int)MyPdo::getInstance()->lastInsertId());
+        return $this;
+    }
+    public function save(): void
+    {
+        if($this->id === null) {
+            $this->insert();
+        } else {
+            $this->update();
+        }
+    }
+    public static function create(string $name, ?int $id=null): Artist
+    {
+        $artist=new Artist();
+        $artist->setId($id);
+        $artist->setName($name);
+        return $artist;
+    }
+    private function __construct()
+    {
+
     }
 }
