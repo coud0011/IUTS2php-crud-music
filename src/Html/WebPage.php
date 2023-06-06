@@ -4,6 +4,7 @@ namespace Html;
 
 class WebPage
 {
+    use StringEscaper;
     private string $head = "";
     private string $title = "";
     private string $body = "";
@@ -156,15 +157,7 @@ class WebPage
      * @param string $string
      * @return string
      */
-    public function escapeString(string $string): string
-    {
-        return htmlspecialchars($string, ENT_QUOTES | ENT_IGNORE | ENT_HTML5);
-    }
 
-    /**
-     * Méthode Statique renvoyant la date de dernière modification du script principale
-     * @return string
-     */
     public static function getLastModification(): string
     {
         $LastModif=getlastmod();
