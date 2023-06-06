@@ -31,24 +31,31 @@ class ArtistForm
     {
         return <<<HTML
     <form action="$action" method="post">
-        <input name="id" type="hidden" value="">
+        <input name="id" type="hidden" value="{$this->artist?->getId()}">
         <label>Nom
-            <input name="name" type="text" value="{$this->escapeString("{$this?->artist?->getName()}")}" required>
+            <input name="name" type="text" value="{$this->escapeString($this->artist?->getName())}" required>
         </label>
       
         <input name="Enregistrer" type="submit">
     </form>
 HTML;
     }
+
+    /**
+     * @throws ParameterException
+     */
     public function setEntityFromQueryString(): void
     {
-        $id = $_POST["id"] ?? null;
-        if(isset($_POST["name"])) {
-            $name=$_POST["name"];
-        } else {
+        $id = null;
+        if (isset($_POST["id"]) && ctype_digit($_POST["id"])) {
+            $id=(int)$_POST['id'];
+        }
+        if(!isset($_POST["name"]) || empty($this->stripTagsAndTrim($_POST["name"]))) {
             throw new ParameterException("ArtistForm : setEntityFromQueryString : name absent");
         }
-        $this->artist=Artist::create($this->stripTagsAndTrim($name), $id);
+        $name=$this->stripTagsAndTrim($_POST["name"]);
+
+        $this->artist=Artist::create($name, $id);
     }
 
 }

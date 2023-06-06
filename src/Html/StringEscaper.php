@@ -12,17 +12,11 @@ trait StringEscaper
 {
     public function escapeString(?string $string): string
     {
-        return htmlspecialchars($string, ENT_QUOTES | ENT_IGNORE | ENT_HTML5);
+        return htmlspecialchars($string ?? '', ENT_QUOTES | ENT_IGNORE | ENT_HTML5);
     }
     public function stripTagsAndTrim(?string $text): string
     {
-        if($text===null) {
-            $text="";
-        } else {
-            $text = trim(strip_tags($text));
-        }
-        return $text;
-
+        return trim(strip_tags($text ?? ''));
     }
 
     /**
